@@ -48,7 +48,6 @@ namespace ParallelCompulsory1
 
                 Console.WriteLine("Found {0} primes.", primes.Count);
                 Console.WriteLine("Sequential execution time: {0:F5}", sw.ElapsedMilliseconds / 1000.0);
-                //Console.WriteLine(string.Join(" ", primes.ToArray()));
 
                 sw.Restart();
                 primes = GetPrimesParallel(first, last);
@@ -64,7 +63,7 @@ namespace ParallelCompulsory1
         }
 
 
-
+        // Find primes in the indicated range, sequentially.
         public List<long> GetPrimesSequential(long first, long last)
         {
             var primes = new List<long>();
@@ -74,14 +73,13 @@ namespace ParallelCompulsory1
                 if (pc.NumberIsPrime(i))
                 {
                     primes.Add(i);
-                    //Console.WriteLine("{0} is a prime.", i);
                 }
             }
 
             return primes;
         }
 
-        // Find primes in the 
+        // Find primes in the indicated range, in parallel.
         public List<long> GetPrimesParallel(long first, long last)
         {
             List<long> numbers = new List<long>();

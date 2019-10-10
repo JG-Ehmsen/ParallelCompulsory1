@@ -30,7 +30,6 @@ namespace GUI
         /// </summary>
         private void InitializeComponent()
         {
-            this.listResults = new System.Windows.Forms.ListView();
             this.btnRunSeq = new System.Windows.Forms.Button();
             this.btnRunPar = new System.Windows.Forms.Button();
             this.txtStartingNumber = new System.Windows.Forms.TextBox();
@@ -39,19 +38,8 @@ namespace GUI
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.lblElapsedTime = new System.Windows.Forms.Label();
-            this.Prime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.listResults = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
-            // 
-            // listResults
-            // 
-            this.listResults.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Prime});
-            this.listResults.HideSelection = false;
-            this.listResults.Location = new System.Drawing.Point(12, 12);
-            this.listResults.Name = "listResults";
-            this.listResults.Size = new System.Drawing.Size(253, 268);
-            this.listResults.TabIndex = 0;
-            this.listResults.UseCompatibleStateImageBehavior = false;
             // 
             // btnRunSeq
             // 
@@ -61,7 +49,7 @@ namespace GUI
             this.btnRunSeq.TabIndex = 1;
             this.btnRunSeq.Text = "Sequential";
             this.btnRunSeq.UseVisualStyleBackColor = true;
-            this.btnRunSeq.Click += new System.EventHandler(this.btnRunSeq_Click);
+            this.btnRunSeq.Click += new System.EventHandler(this.btn_Click);
             // 
             // btnRunPar
             // 
@@ -71,7 +59,7 @@ namespace GUI
             this.btnRunPar.TabIndex = 2;
             this.btnRunPar.Text = "Parallel";
             this.btnRunPar.UseVisualStyleBackColor = true;
-            this.btnRunPar.Click += new System.EventHandler(this.btnRunPar_Click);
+            this.btnRunPar.Click += new System.EventHandler(this.btn_Click);
             // 
             // txtStartingNumber
             // 
@@ -123,11 +111,20 @@ namespace GUI
             this.lblElapsedTime.TabIndex = 8;
             this.lblElapsedTime.Text = "0.00000";
             // 
+            // listResults
+            // 
+            this.listResults.FormattingEnabled = true;
+            this.listResults.Location = new System.Drawing.Point(13, 12);
+            this.listResults.Name = "listResults";
+            this.listResults.Size = new System.Drawing.Size(254, 264);
+            this.listResults.TabIndex = 9;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(279, 412);
+            this.Controls.Add(this.listResults);
             this.Controls.Add(this.lblElapsedTime);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -136,7 +133,6 @@ namespace GUI
             this.Controls.Add(this.txtStartingNumber);
             this.Controls.Add(this.btnRunPar);
             this.Controls.Add(this.btnRunSeq);
-            this.Controls.Add(this.listResults);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -145,8 +141,6 @@ namespace GUI
         }
 
         #endregion
-
-        private System.Windows.Forms.ListView listResults;
         private System.Windows.Forms.Button btnRunSeq;
         private System.Windows.Forms.Button btnRunPar;
         private System.Windows.Forms.TextBox txtStartingNumber;
@@ -155,7 +149,7 @@ namespace GUI
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblElapsedTime;
-        private System.Windows.Forms.ColumnHeader Prime;
+        private System.Windows.Forms.ListBox listResults;
     }
 }
 

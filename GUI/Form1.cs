@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
@@ -18,6 +20,7 @@ namespace GUI
         App app;
 
         double elapsedTime;
+        List<string> _primes;
 
         public Form1()
         {
@@ -26,42 +29,27 @@ namespace GUI
             sw = new Stopwatch();
         }
 
-        private void btnRunSeq_Click(object sender, System.EventArgs e)
+        private void UpdateTable(string[] primes)
         {
-            Console.WriteLine("Clicked run Seq");
-
-            long start;
-            long end;
-
-            if (!Int64.TryParse(txtStartingNumber.Text, out start))
-                return;
-            if (!Int64.TryParse(txtEndingNumber.Text, out end))
-                return;
-            sw.Restart();
-            var primes = app.GetPrimesSequential(start, end);
-            sw.Stop();
-            lblElapsedTime.Text = (sw.ElapsedMilliseconds / 1000.0).ToString("F5");
-            //listResults.Get
+            listResults.Items.Clear();
+            listResults.Items.AddRange(primes);
         }
 
-        private void btnRunPar_Click(object sender, System.EventArgs e)
+        private void btn_Click(object sender, System.EventArgs e)
         {
-            Task.Factory.StartNew(() => runParallel(), 
-                CancellationToken.None, 
-                TaskCreationOptions.None,
-                TaskScheduler.FromCurrentSynchronizationContext());
-            Console.WriteLine("Clicked run par");
+            bool parallel = sender.Equals(btnRunPar);
 
             var wrk = new BackgroundWorker();
-            wrk.DoWork += (s, ea) => runParallel();
+            wrk.DoWork += (s, ea) => runGetPrimes(parallel);
             wrk.RunWorkerCompleted += (s, ea) =>
             {
                 lblElapsedTime.Text = elapsedTime.ToString("F5");
+                UpdateTable(_primes.ToArray());
             };
             wrk.RunWorkerAsync();
         }
 
-        private void runParallel()
+        private void runGetPrimes(bool parallel)
         {
             long start;
             long end;
@@ -70,10 +58,24 @@ namespace GUI
                 return;
             if (!Int64.TryParse(txtEndingNumber.Text, out end))
                 return;
+
+            List<string> primes;
             sw.Restart();
-            var primes = app.GetPrimesParallel(start, end);
+            if (parallel)
+            {
+                primes = app.GetPrimesParallel(start, end);
+            } else
+            {
+                primes = app.GetPrimesSequential(start, end);
+            }
+            _primes = primes;
             sw.Stop();
             elapsedTime = (sw.ElapsedMilliseconds / 1000.0);
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

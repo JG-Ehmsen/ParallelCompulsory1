@@ -134,7 +134,7 @@ namespace GUI
             this.Controls.Add(this.btnRunPar);
             this.Controls.Add(this.btnRunSeq);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Prime Finder";
             this.ResumeLayout(false);
             this.PerformLayout();
 

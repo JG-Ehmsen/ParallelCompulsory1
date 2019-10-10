@@ -72,10 +72,5 @@ namespace GUI
             sw.Stop();
             elapsedTime = (sw.ElapsedMilliseconds / 1000.0);
         }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }
